@@ -66,7 +66,6 @@ function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-
     return fetch('http://localhost:8000/api/user', requestOptions).then(handleResponse);
 }
 
@@ -93,7 +92,6 @@ function _delete(id) {
 function handleResponse(response) {
     if (!response.ok) { 
         return Promise.reject(response.statusText);
-    }
-
+    }    
     return response.json();
 }

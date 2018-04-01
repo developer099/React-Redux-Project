@@ -8,12 +8,14 @@ import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
+import './App.css';
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
-        const { dispatch } = this.props;
+        const { dispatch } = this.props;        
         history.listen((location, action) => {
             // clear alert on location change
             dispatch(alertActions.clear());

@@ -21,7 +21,7 @@ router.put('/password', auth.isAuthenticated(), controller.updatePassword);
  * Manager, Admin routes
 **/
 // Get the list of users
-router.get('/', auth.hasRole('manager'), controller.index);
+router.get('/', controller.index);
 
 // Create a new user
 router.post('/new', auth.hasRole('manager'), controller.createUser);

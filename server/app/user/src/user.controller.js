@@ -8,7 +8,7 @@ var User = require('./user.model'),
  * Create a new user
 **/
 exports.create = function(req, res) {
-    var newUser = new User(req.body);    
+    var newUser = new User(req.body);
     newUser.save(function(err, user) {
         if(err) 
             return res.status(422).json({
@@ -84,12 +84,10 @@ exports.updatePassword = function(req, res) {
 **/
 exports.index = function(req, res) {
     var userParams = {};
-    if(req.user.role == 'manager')
-        userParams = { role: 'user' };
-    User.find(userParams, '-salt -password', function (err, users) {
+    User.find(userParams, '-salt -password -updatedAt', function (err, users) {
         if(err) return res.status(500).json({
             message: errorHandler.getErrorMessage(err)
-        });
+        });        
         res.status(200).json(users);
     });
 };

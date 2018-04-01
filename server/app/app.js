@@ -10,7 +10,12 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     path = require('path'),
     passport = require('passport'),
-    config = require('../config');
+    config = require('../config'),
+    io = require('socket.io').listen(8001);
+
+io.sockets.on('connection', (socket) => {
+    console.log('user connected');
+});
 
 module.exports = function() {
     // Initialize express app
@@ -28,8 +33,10 @@ module.exports = function() {
     app.use(cookieParser());
     app.use(passport.initialize());
     app.use(morgan('dev'));
-
-    require('./routes')(app);
-  
+    app.use(function(req, res, next){
+        req.io = io;
+        next();
+    })
+    require('./routes')(app, io);
     return app;
 };

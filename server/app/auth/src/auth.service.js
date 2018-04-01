@@ -15,7 +15,7 @@ exports.generateToken = function(id, role) {
 /**
  * Check the JWT authorization header
  */
-exports.isAuthenticated = function() {    
+exports.isAuthenticated = function() {
     return passport.authenticate('jwt', config.jwtSession);
 };
 
